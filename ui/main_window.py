@@ -340,6 +340,13 @@ class Ui_MainWindow(object):
 
         self.gridLayout.addLayout(self.gridLayout_4, 3, 8, 1, 2)
 
+        self.button_displayBase = QPushButton(self.centralwidget)
+        self.button_displayBase.setObjectName(u"button_displayBase")
+        sizePolicy.setHeightForWidth(self.button_displayBase.sizePolicy().hasHeightForWidth())
+        self.button_displayBase.setSizePolicy(sizePolicy)
+
+        self.gridLayout.addWidget(self.button_displayBase, 1, 9, 1, 1, Qt.AlignRight)
+
         self.curFloor_spinBox = QSpinBox(self.centralwidget)
         self.curFloor_spinBox.setObjectName(u"curFloor_spinBox")
         self.curFloor_spinBox.setMinimum(1)
@@ -366,8 +373,8 @@ class Ui_MainWindow(object):
         self.button_lockFloor = QPushButton(self.centralwidget)
         self.button_lockFloor.setObjectName(u"button_lockFloor")
         self.button_lockFloor.setEnabled(True)
-        sizePolicy1.setHeightForWidth(self.button_lockFloor.sizePolicy().hasHeightForWidth())
-        self.button_lockFloor.setSizePolicy(sizePolicy1)
+        sizePolicy.setHeightForWidth(self.button_lockFloor.sizePolicy().hasHeightForWidth())
+        self.button_lockFloor.setSizePolicy(sizePolicy)
         icon = QIcon()
         icon.addFile(u"ui/unlock.png", QSize(), QIcon.Normal, QIcon.Off)
         icon.addFile(u"ui/block.png", QSize(), QIcon.Normal, QIcon.On)
@@ -377,12 +384,14 @@ class Ui_MainWindow(object):
         self.button_lockFloor.setAutoDefault(False)
         self.button_lockFloor.setFlat(False)
 
-        self.horizontalLayout_6.addWidget(self.button_lockFloor)
+        self.horizontalLayout_6.addWidget(self.button_lockFloor, 0, Qt.AlignRight)
 
         self.button_saveParams = QPushButton(self.centralwidget)
         self.button_saveParams.setObjectName(u"button_saveParams")
+        sizePolicy.setHeightForWidth(self.button_saveParams.sizePolicy().hasHeightForWidth())
+        self.button_saveParams.setSizePolicy(sizePolicy)
 
-        self.horizontalLayout_6.addWidget(self.button_saveParams)
+        self.horizontalLayout_6.addWidget(self.button_saveParams, 0, Qt.AlignRight)
 
 
         self.gridLayout.addLayout(self.horizontalLayout_6, 5, 9, 1, 1)
@@ -391,13 +400,6 @@ class Ui_MainWindow(object):
         self.button_saveGraph.setObjectName(u"button_saveGraph")
 
         self.gridLayout.addWidget(self.button_saveGraph, 1, 2, 1, 1)
-
-        self.button_displayBase = QPushButton(self.centralwidget)
-        self.button_displayBase.setObjectName(u"button_displayBase")
-        sizePolicy1.setHeightForWidth(self.button_displayBase.sizePolicy().hasHeightForWidth())
-        self.button_displayBase.setSizePolicy(sizePolicy1)
-
-        self.gridLayout.addWidget(self.button_displayBase, 1, 9, 1, 1)
 
         self.horizontalSpacer = QSpacerItem(40, 20, QSizePolicy.MinimumExpanding, QSizePolicy.Minimum)
 
@@ -455,24 +457,6 @@ class Ui_MainWindow(object):
 
         self.gridLayout.addWidget(self.button_exit, 1, 6, 1, 1)
 
-        self.scrollArea = QScrollArea(self.centralwidget)
-        self.scrollArea.setObjectName(u"scrollArea")
-        sizePolicy2 = QSizePolicy(QSizePolicy.Preferred, QSizePolicy.Expanding)
-        sizePolicy2.setHorizontalStretch(0)
-        sizePolicy2.setVerticalStretch(0)
-        sizePolicy2.setHeightForWidth(self.scrollArea.sizePolicy().hasHeightForWidth())
-        self.scrollArea.setSizePolicy(sizePolicy2)
-        self.scrollArea.setFrameShape(QFrame.NoFrame)
-        self.scrollArea.setWidgetResizable(True)
-        self.scrollAreaWidgetContents_2 = QWidget()
-        self.scrollAreaWidgetContents_2.setObjectName(u"scrollAreaWidgetContents_2")
-        self.scrollAreaWidgetContents_2.setGeometry(QRect(0, 0, 677, 692))
-        self.gridLayout_3 = QGridLayout(self.scrollAreaWidgetContents_2)
-        self.gridLayout_3.setObjectName(u"gridLayout_3")
-        self.scrollArea.setWidget(self.scrollAreaWidgetContents_2)
-
-        self.gridLayout.addWidget(self.scrollArea, 3, 0, 6, 7)
-
 
         self.gridLayout_2.addLayout(self.gridLayout, 0, 0, 3, 1)
 
@@ -515,15 +499,17 @@ class Ui_MainWindow(object):
         self.label_5.setText(QCoreApplication.translate("MainWindow", u"weight:", None))
         self.t_label_7.setText(QCoreApplication.translate("MainWindow", u"Recharge:", None))
         self.t_label_9.setText(QCoreApplication.translate("MainWindow", u"Class:", None))
+        self.button_displayBase.setText(QCoreApplication.translate("MainWindow", u"Display Baseline", None))
         self.label_14.setText(QCoreApplication.translate("MainWindow", u"Current floor:", None))
         self.button_lockFloor.setText("")
         self.button_saveParams.setText(QCoreApplication.translate("MainWindow", u"Save", None))
         self.button_saveGraph.setText(QCoreApplication.translate("MainWindow", u"Save .graphml", None))
-        self.button_displayBase.setText(QCoreApplication.translate("MainWindow", u"Display Baseline", None))
         self.button_saveConf.setText(QCoreApplication.translate("MainWindow", u"Save Config", None))
         self.button_loadConf.setText(QCoreApplication.translate("MainWindow", u"Load Config", None))
         self.m_label_2.setText(QCoreApplication.translate("MainWindow", u"Parametizer", None))
         self.m_label.setText(QCoreApplication.translate("MainWindow", u"Configurator", None))
         self.button_exit.setText(QCoreApplication.translate("MainWindow", u"Exit", None))
     # retranslateUi
+
+
 

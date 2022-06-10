@@ -33,126 +33,6 @@
         </property>
        </widget>
       </item>
-      <item row="1" column="1">
-       <widget class="QPushButton" name="button_saveConf">
-        <property name="text">
-         <string>Save Config</string>
-        </property>
-       </widget>
-      </item>
-      <item row="2" column="0" colspan="7">
-       <widget class="Line" name="line_2">
-        <property name="sizePolicy">
-         <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-          <horstretch>0</horstretch>
-          <verstretch>0</verstretch>
-         </sizepolicy>
-        </property>
-        <property name="orientation">
-         <enum>Qt::Horizontal</enum>
-        </property>
-       </widget>
-      </item>
-      <item row="1" column="5">
-       <spacer name="horizontalSpacer">
-        <property name="orientation">
-         <enum>Qt::Horizontal</enum>
-        </property>
-        <property name="sizeType">
-         <enum>QSizePolicy::MinimumExpanding</enum>
-        </property>
-        <property name="sizeHint" stdset="0">
-         <size>
-          <width>40</width>
-          <height>20</height>
-         </size>
-        </property>
-       </spacer>
-      </item>
-      <item row="2" column="8" colspan="2">
-       <widget class="Line" name="line_3">
-        <property name="sizePolicy">
-         <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-          <horstretch>0</horstretch>
-          <verstretch>0</verstretch>
-         </sizepolicy>
-        </property>
-        <property name="orientation">
-         <enum>Qt::Horizontal</enum>
-        </property>
-       </widget>
-      </item>
-      <item row="5" column="8">
-       <widget class="QLabel" name="m_label_2">
-        <property name="text">
-         <string>Parametizer</string>
-        </property>
-       </widget>
-      </item>
-      <item row="1" column="0">
-       <widget class="QPushButton" name="button_loadConf">
-        <property name="text">
-         <string>Load Config</string>
-        </property>
-       </widget>
-      </item>
-      <item row="1" column="9">
-       <widget class="QPushButton" name="button_displayBase">
-        <property name="sizePolicy">
-         <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-          <horstretch>0</horstretch>
-          <verstretch>0</verstretch>
-         </sizepolicy>
-        </property>
-        <property name="text">
-         <string>Display Baseline</string>
-        </property>
-       </widget>
-      </item>
-      <item row="8" column="8">
-       <spacer name="verticalSpacer_2">
-        <property name="orientation">
-         <enum>Qt::Vertical</enum>
-        </property>
-        <property name="sizeType">
-         <enum>QSizePolicy::Maximum</enum>
-        </property>
-        <property name="sizeHint" stdset="0">
-         <size>
-          <width>20</width>
-          <height>250</height>
-         </size>
-        </property>
-       </spacer>
-      </item>
-      <item row="6" column="8" colspan="2">
-       <widget class="Line" name="line_5">
-        <property name="orientation">
-         <enum>Qt::Horizontal</enum>
-        </property>
-       </widget>
-      </item>
-      <item row="1" column="7" rowspan="8">
-       <widget class="Line" name="line">
-        <property name="orientation">
-         <enum>Qt::Vertical</enum>
-        </property>
-       </widget>
-      </item>
-      <item row="1" column="6">
-       <widget class="QPushButton" name="button_exit">
-        <property name="text">
-         <string>Exit</string>
-        </property>
-       </widget>
-      </item>
-      <item row="1" column="3">
-       <widget class="QLabel" name="label_14">
-        <property name="text">
-         <string>Current floor:</string>
-        </property>
-       </widget>
-      </item>
       <item row="3" column="8" colspan="2">
        <layout class="QGridLayout" name="gridLayout_4">
         <item row="0" column="1">
@@ -572,6 +452,19 @@
         </item>
        </layout>
       </item>
+      <item row="1" column="9" alignment="Qt::AlignRight">
+       <widget class="QPushButton" name="button_displayBase">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="text">
+         <string>Display Baseline</string>
+        </property>
+       </widget>
+      </item>
       <item row="1" column="4">
        <widget class="QSpinBox" name="curFloor_spinBox">
         <property name="minimum">
@@ -582,56 +475,35 @@
         </property>
        </widget>
       </item>
-      <item row="1" column="2">
-       <widget class="QPushButton" name="button_saveGraph">
+      <item row="1" column="3">
+       <widget class="QLabel" name="label_14">
         <property name="text">
-         <string>Save .graphml</string>
+         <string>Current floor:</string>
         </property>
        </widget>
       </item>
-      <item row="1" column="8">
-       <widget class="QLabel" name="m_label">
-        <property name="text">
-         <string>Configurator</string>
-        </property>
-       </widget>
-      </item>
-      <item row="3" column="0" rowspan="6" colspan="7">
-       <widget class="QScrollArea" name="scrollArea">
+      <item row="2" column="0" colspan="7">
+       <widget class="Line" name="line_2">
         <property name="sizePolicy">
-         <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
+         <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
           <horstretch>0</horstretch>
           <verstretch>0</verstretch>
          </sizepolicy>
         </property>
-        <property name="frameShape">
-         <enum>QFrame::NoFrame</enum>
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
         </property>
-        <property name="widgetResizable">
-         <bool>true</bool>
-        </property>
-        <widget class="QWidget" name="scrollAreaWidgetContents_2">
-         <property name="geometry">
-          <rect>
-           <x>0</x>
-           <y>0</y>
-           <width>677</width>
-           <height>692</height>
-          </rect>
-         </property>
-         <layout class="QGridLayout" name="gridLayout_3"/>
-        </widget>
        </widget>
       </item>
       <item row="5" column="9">
        <layout class="QHBoxLayout" name="horizontalLayout_6">
-        <item>
+        <item alignment="Qt::AlignRight">
          <widget class="QPushButton" name="button_lockFloor">
           <property name="enabled">
            <bool>true</bool>
           </property>
           <property name="sizePolicy">
-           <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+           <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
             <horstretch>0</horstretch>
             <verstretch>0</verstretch>
            </sizepolicy>
@@ -641,8 +513,8 @@
           </property>
           <property name="icon">
            <iconset>
-            <normaloff>../unlocking.png</normaloff>
-            <normalon>../blocking.png</normalon>../unlocking.png</iconset>
+            <normaloff>unlock.png</normaloff>
+            <normalon>block.png</normalon>unlock.png</iconset>
           </property>
           <property name="checkable">
            <bool>true</bool>
@@ -661,14 +533,121 @@
           </property>
          </widget>
         </item>
-        <item>
+        <item alignment="Qt::AlignRight">
          <widget class="QPushButton" name="button_saveParams">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
           <property name="text">
            <string>Save</string>
           </property>
          </widget>
         </item>
        </layout>
+      </item>
+      <item row="1" column="2">
+       <widget class="QPushButton" name="button_saveGraph">
+        <property name="text">
+         <string>Save .graphml</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="5">
+       <spacer name="horizontalSpacer">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+        <property name="sizeType">
+         <enum>QSizePolicy::MinimumExpanding</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>40</width>
+          <height>20</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+      <item row="1" column="1">
+       <widget class="QPushButton" name="button_saveConf">
+        <property name="text">
+         <string>Save Config</string>
+        </property>
+       </widget>
+      </item>
+      <item row="8" column="8">
+       <spacer name="verticalSpacer_2">
+        <property name="orientation">
+         <enum>Qt::Vertical</enum>
+        </property>
+        <property name="sizeType">
+         <enum>QSizePolicy::Maximum</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>20</width>
+          <height>250</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+      <item row="6" column="8" colspan="2">
+       <widget class="Line" name="line_5">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="8" colspan="2">
+       <widget class="Line" name="line_3">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="0">
+       <widget class="QPushButton" name="button_loadConf">
+        <property name="text">
+         <string>Load Config</string>
+        </property>
+       </widget>
+      </item>
+      <item row="5" column="8">
+       <widget class="QLabel" name="m_label_2">
+        <property name="text">
+         <string>Parametizer</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="7" rowspan="8">
+       <widget class="Line" name="line">
+        <property name="orientation">
+         <enum>Qt::Vertical</enum>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="8">
+       <widget class="QLabel" name="m_label">
+        <property name="text">
+         <string>Configurator</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="6">
+       <widget class="QPushButton" name="button_exit">
+        <property name="text">
+         <string>Exit</string>
+        </property>
+       </widget>
       </item>
      </layout>
     </item>
