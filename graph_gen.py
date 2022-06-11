@@ -25,7 +25,6 @@ def generate(storage):
     modules = storage["modules"]
 
     g = nx.DiGraph()
-    storage_struct = []
 
     for module_id, module in enumerate(modules, 1):
         # add lifts "<module_id>_<type>_<cross_link>_<cell>"
@@ -251,12 +250,15 @@ def generate(storage):
                             # e._directed = True
                         )
 
+
     # write graph
-    nx.write_graphml_lxml(g, "./output/temp_storagenx.graphml")
+    graph_path = "./output/temp_storagenx.graphml"
+    nx.write_graphml_lxml(g, graph_path)
 
     # write db predata
-    with open(os.path.join(BASE_DIR, 'output', 'temp_db_predata.csv'), 'w', newline='') as csvfile:
+    db_predata_path = os.path.join(BASE_DIR, 'output', 'temp_db_predata.csv')
+    with open(db_predata_path, 'w', newline='') as csvfile:
         writer = csv.writer(csvfile)
         writer.writerows(db_predata)
 
-    return g, db_predata
+    return g, db_predata, graph_path, db_predata_path

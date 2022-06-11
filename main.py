@@ -21,19 +21,23 @@ from graph_gen import generate
 GREEN = (32, 162, 156)
 DARK_GREY = (44, 55, 62)
 
+# for common fonts in app
 MAIN_FONT = QFont()
 MAIN_FONT.setWeight(QFont.Bold)
 TITLE_FONT = QFont()
 TITLE_FONT.setWeight(QFont.DemiBold)
 STANDART_FONT = QFont()
 
+# colors for graph drawing, each node has two conditions: normal and picked
 COLORS = {"normal": {"L": "#55efc4", "CS": "#ffeaa7", "A": "#74b9ff", "R": "#adef52", "E": "#ef8c69"},
           "picked": {"L": "#52D6AB", "CS": "#D7C38A", "A": "#6299D6", "R": "#8FCC54", "E": "#D57368"}}
 
+# full node type name relationships with short type name
 NODE_TYPE = {"A": "Aile", "CS": "Cross station", "L": "Lift", "R": "Recharge point", "E": "Enter point"}
 
 
 class NodeParametizer(Ui_NodeForm, QWidget):
+    """Special class for node parametizer block"""
     def __init__(self):
         super().__init__()
         self.setupUi(self)
@@ -48,6 +52,7 @@ class NodeParametizer(Ui_NodeForm, QWidget):
 
 
 class EdgeParametizer(Ui_EdgeForm, QWidget):
+    """Class for edge parametizer block"""
     def __init__(self):
         super().__init__()
         self.setupUi(self)
@@ -62,6 +67,7 @@ class EdgeParametizer(Ui_EdgeForm, QWidget):
 
 
 class GraphGUI(QMainWindow, Ui_MainWindow):
+    """Main class for app"""
     def __init__(self):
         super().__init__()
         self.setupUi(self)
@@ -72,11 +78,12 @@ class GraphGUI(QMainWindow, Ui_MainWindow):
 
         self.cur_config = None  # current config.yaml file, None when no file selected
         self.cur_graphml = None  # current .graphml file, None when no file selected
-        self.prev_ind = None  # previous index for chosen node??? это для отрисовки
+        self.prev_ind = None  # previous index for chosen node for graph drawing
 
-        self.cur_params = 0  # 0 if none selected, 1 if node selected, 2 if edge selected
+        self.cur_params = 0  # current parametizer block in use, 0 if none selected, 1 if node selected, 2 if edge selected
 
     def setParametizersAndCanvas(self):
+        """Sets canvas and empty parametizer when the app starts"""
         self.setEmptyParametizer()
 
         self.figure = plt.figure()
@@ -102,7 +109,7 @@ class GraphGUI(QMainWindow, Ui_MainWindow):
             label.setFont(STANDART_FONT)
 
     def connect_buttons(self):
-        """Adds actions to all buttons"""
+        """Adds actions to buttons"""
         self.button_loadConf.clicked.connect(self.load_config)
         self.button_saveConf.clicked.connect(self.save_config)
         self.button_exit.clicked.connect(self.close)
@@ -165,13 +172,15 @@ class GraphGUI(QMainWindow, Ui_MainWindow):
         self.classB_spinBox.setValue(p_class["B"])
 
     def save_config(self):
-        """Loads all data from current config to configurator block"""
-        filename, filter = QFileDialog.getSaveFileName(
-            parent=self, caption='Save config file',
-            dir='.', filter='*.yaml *.yml')
-        self.cur_config = filename
-        with open(filename, 'w', encoding='utf8') as f:
+        """Saves all data from configurator widgets to config file"""
+        if self.cur_config is None:
+            filename, filter = QFileDialog.getSaveFileName(
+                parent=self, caption='Save config file',
+                dir='.', filter='*.yaml *.yml')
+            self.cur_config = filename
+        with open(self.cur_config, 'w', encoding='utf8') as f:
             yaml.dump(self.get_config_data(), f, sort_keys=False)
+
         self.statusBar.showMessage(f"{self.cur_config} was saved", 5000)
 
     def get_config_data(self):
@@ -198,28 +207,23 @@ class GraphGUI(QMainWindow, Ui_MainWindow):
         return storage
 
     def display_base(self):
-        """Makes xml and displays it to canvas"""
-        if self.cur_config is None:
-            try:
-                # сохраняем конфиг кароче, если он создан заново (причем если хоть одно поле пустое, то предлагается создать новый файл)
-                graph, db_predata, graph_path, db_predata_path = generate(
-                    self.get_config_data())  # [['id', 'cont_id', 'empty', 'class_type', 'floor', 'rack', 'cell', 'side'], ['1_A_1_1_1_L', None, True, 'A', 1, 1, 1, 'L'],...]
-                self.cur_graphml = graph_path
-                self.save_config()
-                cur_floor = self.curFloor_spinBox.value()
-                self.vis_graph(cur_floor, graph)
-            except Exception as e:
-                #print(e) - все работает)))
-                self.load_config()
-                graph, db_predata, graph_path, db_predata_path = generate(self.get_config_data())
-                self.cur_graphml = graph_path
-                cur_floor = self.curFloor_spinBox.value()
-                self.vis_graph(cur_floor, graph)
-
-        self.statusBar.showMessage(f"temp files (xml and csv) were created", 5000)
+        """Makes xml and displays it to canvas
+        Saves config data from widgets if a new file was created
+        if at least on field is empty offers to open already existing file"""
+        # [['id', 'cont_id', 'empty', 'class_type', 'floor', 'rack', 'cell', 'side'],
+        # ['1_A_1_1_1_L', None, True, 'A', 1, 1, 1, 'L'],...]
+        try:
+            data = self.get_config_data()
+            graph, db_predata, graph_path, db_predata_path = generate(data)
+            self.cur_graphml = graph_path
+            self.save_config()
+            cur_floor = self.curFloor_spinBox.value()
+            self.vis_graph(cur_floor, graph)
+            self.statusBar.showMessage("temp files (xml and csv) were created", 5000)
+        except Exception as e:
+            self.statusBar.showMessage(f"{e.__class__.__name__} error occured! check the entered data for correctness", 5000)
 
     def vis_graph(self, cur_floor, G):
-
         self.figure.clf()
         ax = self.figure.add_subplot(111)
         ax.axis('off')
@@ -345,14 +349,18 @@ class GraphGUI(QMainWindow, Ui_MainWindow):
         self.gridLayout.addWidget(self.emptyParametizer_label, 7, 8, 1, 2)
 
     def change_params(self, status):
+        """Changes parametizer block from one condition to another"""
+        # removing of current parametizer
         if self.cur_params == 0:
             self.gridLayout.removeWidget(self.emptyParametizer_label)
             self.emptyParametizer_label.deleteLater()
         else:
-            item = self.gridLayout.itemAtPosition(7, 8)
-            self.gridLayout.removeItem(item)
-            item.deleteLater()
-
+            layout = self.nodeBlock.gridLayout if self.cur_params == 1 else self.edgeBlock.gridLayout
+            while layout.count():
+                item = layout.takeAt(0)
+                widget = item.widget()
+                widget.deleteLater()
+        # setting new block depending on wanted condition
         if status == 1:
             self.nodeBlock = NodeParametizer()
             self.nodeBlock.setupUi(self.nodeBlock)
@@ -399,14 +407,15 @@ class GraphGUI(QMainWindow, Ui_MainWindow):
         #self.nodeBlock.rightSide_checkBox.setChecked()
         #l = self.nodeBlock.leftSide_checkBox.isChecked()
 
-        self.nodeBlock.availability_checkBox.setChecked()
-
+        self.nodeBlock.availability_checkBox.setChecked(True)
+        self.nodeBlock.rightSide_checkBox.setChecked(True)
+        self.nodeBlock.leftSide_checkBox.setChecked(True)
 
     def edgeChosedEvent(self, event):
         """Displays Edge Parametizer Widget"""
         all_edges = event.artist
         ind = event.ind[0]
-        edges = list(self)
+        #edges = list(self)
 
         # тут надо дописать все для ребер, но я не нашла (пока) изменение толщины линии отдельного ребра, я доделаю после
 
