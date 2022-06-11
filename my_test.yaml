@@ -1,0 +1,35 @@
+modules:
+- name: something
+  floor:
+    count: 5
+    weight: 1.0
+  cross:
+    count: 4
+    weight: 0.5
+  lift:
+    cs_link:
+    - 4
+    weight: 0.487
+  rack:
+    cs_link:
+    - 1
+    - 2
+    - 3
+    weight: 0.66
+  section:
+    count: 4
+    cells_per_section: 2
+    section_gap: 3.0
+  cell:
+    weight: 1.5
+  recharge_point:
+    floor: 4
+    cross: 1
+    weight: 6.0
+  enter_point:
+    floor: 4
+    cross: 3
+    weight: 7.0
+  class:
+    A: 13
+    B: 34
